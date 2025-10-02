@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9th Monthsary ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #af01ff 0%, #ff0000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        /* Login Page Styles */
+        .login-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 95vh;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        .login-header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 18px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .date-input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #ff4757;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Main Page Styles */
+        .main-page {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .main-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .main-header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Countdown Styles */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #BFD2FF, #BFF2FF);
+            border-radius: 15px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Photos Section */
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-placeholder {
+            aspect-ratio: 4/3;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Message Section */
+        .message-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.2s;
+        }
+
+        .message-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 70vh;
+            text-align: center;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Songs Section */
+        .songs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .spotify-embed {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Your Message Section */
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message-textarea {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #BFD2FF, #BFF2FF);
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .messages-display {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            min-height: 60px;
+        }
+
+        .message-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message-author {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .edit-btn, .save-btn, .cancel-btn, .delete-btn {
+            background: linear-gradient(45deg, #BFD2FF, #BFF2FF);
+            color: #333;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .edit-btn:hover, .save-btn:hover, .cancel-btn:hover, .delete-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .delete-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+
+        .edit-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 60px;
+            resize: vertical;
+            margin-top: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .login-header {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .login-header h1,
+            .main-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .login-header p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .countdown-item {
+                padding: 15px;
+                min-width: 60px;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .photos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                max-height: 80vh;
+                margin: 5% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-header">
+            <h1>Enter the password to open :P</h1>
+            <p>Hint: Red Ruby</p>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input type="date" class="date-input" id="passwordInput" required>
+                <button type="submit" class="login-btn">Mwuaaa!</button>
+                <div id="errorMessage" class="error-message">Mali ung date! Ulitin mo :/</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="mainPage" class="main-page">
+        <div class="container">
+            <!-- Header -->
+            <div class="main-header">
+                <h1>Happy 9th monthsary, Baby Siopao &lt;3</h1>
+                <p>Time flies when I'm with you.</p>
+            </div>
+
+            <!-- Photos Section -->
+            <div class="section">
+                <h2 class="section-title">My fav photos with my wife!</h2>
+                <div class="photos-grid">
+                    <div class="photo-item">
+                        <img src="IMG_1860.png" alt="Anniversary photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                    </div>
+                    <div class="photo-item">
+                        <img src="IMG_1861.png" alt="Anniversary photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Message Section -->
+            <div class="section">
+                <button class="message-btn" onclick="openModal()">Click me!! Please</button>
+            </div>
+
+            <!-- Songs Section -->
+            <div class="section">
+                <h2 class="section-title">Our songs ^^ &lt;3</h2>
+                <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 20px;">Maybe u have other songs in mind? :3</p>
+                
+                <div class="song-input-section" style="margin-bottom: 25px;">
+                    <form onsubmit="addSong(event)" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="url" id="songInput" placeholder="Paste Spotify song URL here..." style="flex: 1; min-width: 250px; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;" required>
+                        <button type="submit" style="background: linear-gradient(45deg, #BFD2FF, #BFF2FF); color: #333; border: none; padding: 12px 20px; border-radius: 10px; font-weight: bold; cursor: pointer;">add song 🎵</button>
+                    </form>
+                </div>
+                
+                <div class="songs-list" id="songsList">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3Ues7YM3y8JYnTeu2OYFVH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/06IkOr83qPqa3yYvrIjgxp?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1Q7EgiMOuwDcB0PJC6AzON?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Countdown Section -->
+            <div class="section">
+                <h2 class="section-title">Count down to our anniversary :3</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">--</span>
+                        <span class="countdown-label">days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">--</span>
+                        <span class="countdown-label">hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">--</span>
+                        <span class="countdown-label">minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">--</span>
+                        <span class="countdown-label">seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Message Section -->
+            <div class="section">
+                <h2 class="section-title">Any messages for Siopao?
+                <form class="message-form" onsubmit="addMessage(event)">
+                    <textarea class="message-textarea" id="messageInput" placeholder="write your message here!" required></textarea>
+                    <button type="submit" class="submit-btn">send hearts! 💖</button>
+                </form>
+                <div class="messages-display" id="messagesDisplay">
+                    <p style="color: #666; text-align: center; font-style: italic;">patiently waiting for your messages..💭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Custom Message -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #333;">A letter for u my wife! ^^</h2>
+            <div id="customMessage" style="font-size: 1.2rem; line-height: 1.6; color: #555; text-align: left; white-space: pre-line; overflow-y: auto; padding-right: 5px;">
+                Hi Siopao, happy 9th monthsary! XP
+
+We've been through a lot in these past 9 months, haven't we, Siopao? I can't believe we're almost on our anniversary :0. 3 more months, time really do flies so fast. HAHHAHA
+ 
+Siopao, thank you for staying by my side. I want to say this again, that I'm so grateful that I have you in my life.
+
+you know, there's something I never said before. I've always liked it when you bring my inner child out. like I could just be myself, you know? I don't need to act like I'm tough or unbothered when I'm with you. I could do anything with you and not be embarrassed about it. 
+
+truly, you made me feel seen and heard. I've always thought I was hard to love, and it'll be impossible for someone to deal with my attitude, but you proved that wrong. I really, REALLY appreciate all of your efforts for me. even from the little things you do for me, like listeng to me, playing with me, caressing for me, meeting me when we have free time, sharing me your foods and making efforts on gifts. it makes me feel loved and cared for.
+
+I know we had our ups and downs these past few weeks. yeah, we argued and have our misunderstandings. it hurts, yes, and I'm sorry for that. but we'll always find a solution, right? we still have a lot to learn, and we'll learn together. it made our relationship grow stronger, and I'm glad it did.
+
+there will be more challenges up ahead, but I know that we'll get through this together. I really want this to work, baby. so please stay and learn with me.
+
+I love you so much, no words can express how much I love you. please never forget that. ^~^
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login functionality
+        function handleLogin(event) {
+            event.preventDefault();
+            const input = document.getElementById('passwordInput').value;
+            const correctPassword = '2024-12-30'; // 30/12/2024 in YYYY-MM-DD format
+            
+            if (input === correctPassword) {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainPage').style.display = 'block';
+                startCountdown();
+                loadMessages();
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Countdown functionality
+        function startCountdown() {
+            const targetDate = new Date('2025-12-30T00:00:00'); // Anniversary date (30/12/2025)
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate.getTime() - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+                
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = '<p style="text-align: center; font-size: 1.5rem; color: #ff6b6b;">🎉 Happy 9th Monthsary! 🎉</p>';
+                }
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Modal functionality
+        function openModal() {
+            document.getElementById('messageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        // Click outside modal to close
+        window.onclick = function(event) {
+            const modal = document.getElementById('messageModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Message functionality
+        function addMessage(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                const messages = getMessages();
+                const newMessage = {
+                    id: Date.now(),
+                    text: message,
+                    author: 'Your Monkey Girlfriend',
+                    timestamp: new Date().toLocaleString()
+                };
+                
+                messages.push(newMessage);
+                saveMessages(messages);
+                displayMessages();
+                messageInput.value = '';
+            }
+        }
+
+        function getMessages() {
+            const stored = localStorage.getItem('anniversaryMessages');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveMessages(messages) {
+            localStorage.setItem('anniversaryMessages', JSON.stringify(messages));
+        }
+
+        function loadMessages() {
+            displayMessages();
+        }
+
+        function displayMessages() {
+            const messages = getMessages();
+            const display = document.getElementById('messagesDisplay');
+            
+            if (messages.length === 0) {
+                display.innerHTML = '<p style="color: #666; text-align: center; font-style: italic;">patiently waiting for your messages..💭</p>';
+            } else {
+                display.innerHTML = messages.map(msg => `
+                    <div class="message-item" data-id="${msg.id}">
+                        <div class="message-author">${msg.author} - ${msg.timestamp}</div>
+                        <div class="message-content" id="content-${msg.id}">${msg.text}</div>
+                        <div class="message-actions">
+                            <button class="edit-btn" onclick="editMessage(${msg.id})">edit</button>
+                            <button class="delete-btn" onclick="deleteMessage(${msg.id})">delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function editMessage(messageId) {
+            const messages = getMessages();
+            const message = messages.find(msg => msg.id === messageId);
+            if (!message) return;
+
+            const contentDiv = document.getElementById(`content-${messageId}`);
+            const messageItem = contentDiv.closest('.message-item');
+            
+            // Replace content with textarea
+            contentDiv.innerHTML = `
+                <textarea class="edit-textarea" id="edit-${messageId}">${message.text}</textarea>
+            `;
+            
+            // Replace action buttons
+            const actionsDiv = messageItem.querySelector('.message-actions');
+            actionsDiv.innerHTML = `
+                <button class="save-btn" onclick="saveMessage(${messageId})">save</button>
+                <button class="cancel-btn" onclick="cancelEdit(${messageId})">cancel</button>
+            `;
+            
+            // Focus on textarea
+            document.getElementById(`edit-${messageId}`).focus();
+        }
+
+        function saveMessage(messageId) {
+            const newText = document.getElementById(`edit-${messageId}`).value.trim();
+            if (!newText) {
+                alert('Message cannot be empty!');
+                return;
+            }
+
+            const messages = getMessages();
+            const messageIndex = messages.findIndex(msg => msg.id === messageId);
+            if (messageIndex === -1) return;
+
+            // Update message
+            messages[messageIndex].text = newText;
+            messages[messageIndex].timestamp = new Date().toLocaleString() + ' (edited)';
+            
+            saveMessages(messages);
+            displayMessages();
+        }
+
+        function cancelEdit(messageId) {
+            displayMessages();
+        }
+
+        function deleteMessage(messageId) {
+            if (confirm('Are you sure you want to delete this message?')) {
+                const messages = getMessages();
+                const filteredMessages = messages.filter(msg => msg.id !== messageId);
+                saveMessages(filteredMessages);
+                displayMessages();
+            }
+        }
+
+        // Song functionality
+        function addSong(event) {
+            event.preventDefault();
+            const songInput = document.getElementById('songInput');
+            const url = songInput.value.trim();
+            
+            if (url && url.includes('spotify.com/track/')) {
+                // Extract track ID from Spotify URL
+                const trackId = url.match(/track\/([a-zA-Z0-9]+)/);
+                if (trackId) {
+                    const embedUrl = `https://open.spotify.com/embed/track/${trackId[1]}?utm_source=generator`;
+                    
+                    // Create new iframe element
+                    const iframe = document.createElement('iframe');
+                    iframe.className = 'spotify-embed';
+                    iframe.src = embedUrl;
+                    iframe.width = '100%';
+                    iframe.height = '152';
+                    iframe.frameBorder = '0';
+                    iframe.allowfullscreen = '';
+                    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+                    iframe.loading = 'lazy';
+                    
+                    // Add to songs list
+                    document.getElementById('songsList').appendChild(iframe);
+                    
+                    // Clear input
+                    songInput.value = '';
+                } else {
+                    alert('Please enter a valid Spotify track URL');
+                }
+            } else {
+                alert('Please enter a valid Spotify track URL (should contain "spotify.com/track/")');
+            }
+        }
+    </script>
+</body>
+</html>
